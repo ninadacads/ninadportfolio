@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINAD YADAV - Esports &amp; Broadcast Production</title>
+    <style>
+        /* Design System + Custom Neon Gaming Theme */
+        :root {
+            /* Primitive Colors */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            
+            /* Vibrant Neon Colors */
+            --neon-purple: #7C3AED;
+            --neon-purple-light: #A78BFA;
+            --neon-cyan: #06B6D4;
+            --neon-blue: #0EA5E9;
+            --neon-pink: #EC4899;
+            --neon-pink-hot: #F43F5E;
+            --neon-lime: #84CC16;
+            --neon-lime-light: #A3E635;
+            --neon-orange: #FF6B35;
+            
+            /* Dark Backgrounds */
+            --bg-dark-navy: #0F172A;
+            --bg-dark-slate: #1E293B;
+            --bg-darker: #020617;
+            
+            /* Application Colors */
+            --color-background: var(--bg-dark-navy);
+            --color-surface: var(--bg-dark-slate);
+            --color-text: var(--color-white);
+            --color-text-secondary: #E2E8F0;
+            --color-primary: var(--neon-cyan);
+            --color-primary-hover: var(--neon-blue);
+            --color-accent: var(--neon-pink);
+            --color-success: var(--neon-lime);
+            
+            /* Typography */
+            --font-family-base: "FKGroteskNeue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+            --font-size-3xl: 32px;
+            --font-size-4xl: 42px;
+            --font-size-5xl: 56px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-black: 800;
+            
+            /* Spacing */
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --space-64: 64px;
+            --space-80: 80px;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Shadows & Glows */
+            --glow-purple: 0 0 20px rgba(124, 58, 237, 0.6), 0 0 40px rgba(124, 58, 237, 0.3);
+            --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(6, 182, 212, 0.3);
+            --glow-pink: 0 0 20px rgba(236, 72, 153, 0.6), 0 0 40px rgba(236, 72, 153, 0.3);
+            --glow-lime: 0 0 20px rgba(132, 204, 22, 0.6), 0 0 40px rgba(132, 204, 22, 0.3);
+            
+            /* Animation */
+            --duration-fast: 200ms;
+            --duration-normal: 300ms;
+            --duration-slow: 500ms;
+        }
+
+        @font-face {
+            font-family: 'FKGroteskNeue';
+            src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--font-size-base);
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: var(--space-20) var(--space-32);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-black);
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--glow-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-32);
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+            transition: all var(--duration-normal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-32);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-purple);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--neon-cyan);
+            top: 20%;
+            right: -5%;
+            animation-delay: -2s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-pink);
+            bottom: -5%;
+            left: 30%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: var(--space-8) var(--space-20);
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--neon-cyan);
+            border-radius: var(--radius-lg);
+            color: var(--neon-cyan);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-24);
+            opacity: 0;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .hero-title {
+            font-size: var(--font-size-5xl);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--space-24);
+            opacity: 0;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-32);
+            opacity: 0;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-32);
+            margin-bottom: var(--space-48);
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            padding: var(--space-20) var(--space-32);
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-lg);
+            opacity: 0;
+            transition: all var(--duration-normal);
+        }
+
+        .hero-stat:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .hero-stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-black);
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        .hero-stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: var(--space-20) var(--space-48);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+            color: var(--bg-dark-navy);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            font-weight: var(--font-weight-black);
+            font-size: var(--font-size-lg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--duration-normal);
+            opacity: 0;
+            box-shadow: var(--glow-cyan);
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), 0 0 60px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: var(--space-80) var(--space-32);
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--space-48);
+            text-align: center;
+            opacity: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Quick Impact Section */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-32);
+        }
+
+        .impact-card {
+            padding: var(--space-32);
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid transparent;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            opacity: 0;
+            transition: all var(--duration-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan), var(--neon-pink));
+            border-radius: var(--radius-xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+
+        .impact-card:hover::before {
+            opacity: 1;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        .impact-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .impact-stat {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-black);
+            color: var(--neon-cyan);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-32);
+        }
+
+        .service-card {
+            padding: var(--space-32);
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid transparent;
+            border-radius: var(--radius-xl);
+            opacity: 0;
+            transition: all var(--duration-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card.purple { background: rgba(124, 58, 237, 0.1); }
+        .service-card.cyan { background: rgba(6, 182, 212, 0.1); }
+        .service-card.pink { background: rgba(236, 72, 153, 0.1); }
+        .service-card.green { background: rgba(132, 204, 22, 0.1); }
+        .service-card.blue { background: rgba(14, 165, 233, 0.1); }
+        .service-card.orange { background: rgba(255, 107, 53, 0.1); }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: var(--radius-xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+
+        .service-card.purple::before { background: linear-gradient(135deg, var(--neon-purple-light), var(--neon-purple)); }
+        .service-card.cyan::before { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue)); }
+        .service-card.pink::before { background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-hot)); }
+        .service-card.green::before { background: linear-gradient(135deg, var(--neon-lime-light), var(--neon-lime)); }
+        .service-card.blue::before { background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan)); }
+        .service-card.orange::before { background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink)); }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .service-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-12);
+            color: var(--neon-cyan);
+        }
+
+        .service-description {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+        /* Technical Arsenal */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-32);
+        }
+
+        .tech-category {
+            padding: var(--space-32);
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-xl);
+            opacity: 0;
+        }
+
+        .tech-category-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-24);
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        .tech-skill {
+            margin-bottom: var(--space-16);
+        }
+
+        .tech-skill-name {
+            font-size: var(--font-size-md);
+            margin-bottom: var(--space-8);
+            color: var(--color-text-secondary);
+        }
+
+        .tech-bar {
+            height: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .tech-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            width: 0;
+            transition: width 1.5s ease;
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: var(--space-48) 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            transform: translateX(-50%);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: var(--space-48);
+            opacity: 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-content {
+            width: 45%;
+            padding: var(--space-32);
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-xl);
+            transition: all var(--duration-normal);
+            position: relative;
+        }
+
+        .timeline-content.highlight {
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .timeline-year {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--neon-pink);
+            margin-bottom: var(--space-12);
+            text-transform: uppercase;
+        }
+
+        .timeline-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-8);
+            color: var(--neon-cyan);
+        }
+
+        .timeline-company {
+            font-size: var(--font-size-md);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-16);
+            font-style: italic;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+        }
+
+        .timeline-achievements li {
+            padding-left: var(--space-20);
+            margin-bottom: var(--space-8);
+            color: var(--color-text-secondary);
+            position: relative;
+        }
+
+        .timeline-achievements li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: var(--glow-cyan);
+            border: 3px solid var(--bg-dark-navy);
+        }
+
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .event-card {
+            padding: var(--space-24);
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            opacity: 0;
+            transition: all var(--duration-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .event-name {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-32);
+        }
+
+        .achievement-card {
+            padding: var(--space-32);
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            opacity: 0;
+            transition: all var(--duration-normal);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .achievement-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .achievement-metric {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-black);
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+            margin-bottom: var(--space-8);
+        }
+
+        .achievement-label {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-8);
+            color: var(--color-text);
+        }
+
+        .achievement-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* Partners */
+        .partners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-32);
+        }
+
+        .partner-tag {
+            padding: var(--space-16) var(--space-32);
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+            opacity: 0;
+            transition: all var(--duration-normal);
+        }
+
+        .partner-tag:hover {
+            transform: scale(1.1);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            color: var(--neon-cyan);
+        }
+
+        /* Contact/CTA Section */
+        .contact-section {
+            text-align: center;
+            padding: var(--space-80) var(--space-32);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: var(--radius-xl);
+            margin: var(--space-48) auto;
+        }
+
+        .contact-heading {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--space-16);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+        }
+
+        .contact-subheading {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-48);
+            opacity: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-48);
+            margin-bottom: var(--space-48);
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            opacity: 0;
+        }
+
+        .contact-item a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            transition: all var(--duration-normal);
+        }
+
+        .contact-item a:hover {
+            text-shadow: var(--glow-cyan);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-24);
+            flex-wrap: wrap;
+        }
+
+        .cta-secondary {
+            padding: var(--space-20) var(--space-48);
+            background: transparent;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            font-weight: var(--font-weight-black);
+            font-size: var(--font-size-lg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--duration-normal);
+            opacity: 0;
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(6, 182, 212, 0.1);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(2, 6, 23, 0.8);
+            border-top: 2px solid rgba(6, 182, 212, 0.3);
+            padding: var(--space-48) var(--space-32);
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            margin: 0 var(--space-16);
+            transition: all var(--duration-normal);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .social-link:hover {
+            text-shadow: var(--glow-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: var(--font-size-3xl); }
+            .hero-stat { padding: var(--space-16) var(--space-20); }
+            .section-title { font-size: var(--font-size-3xl); }
+            .timeline::before { left: 0; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: 100%; margin-left: var(--space-32); }
+            .timeline-dot { left: 0; transform: translateX(-50%); }
+            .contact-heading { font-size: var(--font-size-3xl); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">NINAD</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#events">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-background">
+            <div class="grid-overlay"></div>
+            <div class="glow-orb orb-1"></div>
+            <div class="glow-orb orb-2"></div>
+            <div class="glow-orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-tag">The One-Man Production Powerhouse</div>
+            <h1 class="hero-title">Next-Level Esports &amp; Broadcast Solutions</h1>
+            <p class="hero-subtitle">10+ Years | 150+ Live Productions | 25,000+ Hours Delivered</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">150+</div>
+                    <div class="hero-stat-label">Live Productions</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">25,000+</div>
+                    <div class="hero-stat-label">Hours Delivered</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">1.2M+</div>
+                    <div class="hero-stat-label">Peak Viewership</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">99.9%</div>
+                    <div class="hero-stat-label">Uptime Standard</div>
+                </div>
+            </div>
+            <a href="#contact" class="cta-button">Launch Your Event</a>
+        </div>
+    </section>
+
+    <!-- Quick Impact -->
+    <section id="impact">
+        <h2 class="section-title">Impact by Numbers</h2>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <div class="impact-icon">🎬</div>
+                <div class="impact-stat">150+ Live Productions</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-icon">⏱️</div>
+                <div class="impact-stat">25,000+ Hours Delivered</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-icon">🏆</div>
+                <div class="impact-stat">29 Major Event IPs</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-icon">🤝</div>
+                <div class="impact-stat">10+ Industry Partners</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <h2 class="section-title">What I Deliver</h2>
+        <div class="services-grid">
+            <div class="service-card purple">
+                <div class="service-icon">📡</div>
+                <h3 class="service-name">Broadcast Engineering</h3>
+                <p class="service-description">Complete broadcast infrastructure design and implementation</p>
+            </div>
+            <div class="service-card cyan">
+                <div class="service-icon">📹</div>
+                <h3 class="service-name">Live Streaming Solutions</h3>
+                <p class="service-description">Multi-platform streaming with advanced encoding and distribution</p>
+            </div>
+            <div class="service-card pink">
+                <div class="service-icon">🎮</div>
+                <h3 class="service-name">Esports Production</h3>
+                <p class="service-description">End-to-end tournament production and event management</p>
+            </div>
+            <div class="service-card green">
+                <div class="service-icon">📺</div>
+                <h3 class="service-name">Multi-Platform Broadcasting</h3>
+                <p class="service-description">Simultaneous broadcast across multiple channels and platforms</p>
+            </div>
+            <div class="service-card blue">
+                <div class="service-icon">🏗️</div>
+                <h3 class="service-name">Infrastructure Design</h3>
+                <p class="service-description">Network architecture and broadcast facility optimization</p>
+            </div>
+            <div class="service-card orange">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-name">Production Management</h3>
+                <p class="service-description">Technical direction and production workflow optimization</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Arsenal -->
+    <section id="tech">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="tech-grid">
+            <div class="tech-category">
+                <h3 class="tech-category-title">Broadcast Engineering</h3>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">SDI/HD-SDI/3G-SDI/12G-SDI</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">RTMP, SRT, NDI, HLS, DASH, WebRTC</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">H.264/H.265/AV1 Codecs</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">SMPTE ST 2110 IP Workflows</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">AWS Elemental, Azure Media Services</div>
+                </div>
+                <div class="tech-bar">
+                    <div class="tech-progress" data-level="95"></div>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3 class="tech-category-title">Production Technology</h3>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Vision Mixers (Grass Valley, Blackmagic)</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Multi-camera PTZ Control</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Audio Routing &amp; Mixing Consoles</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Real-time Color Grading</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Video Distribution Amplifiers</div>
+                </div>
+                <div class="tech-bar">
+                    <div class="tech-progress" data-level="92"></div>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3 class="tech-category-title">Streaming Software</h3>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">OBS Studio, VMix, XSplit</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Wirecast, GT Editor, Titler</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">ATEM Software Control</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Waveform Monitors &amp; Vectorscopes</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">LiveU/LiveBox Bonding</div>
+                </div>
+                <div class="tech-bar">
+                    <div class="tech-progress" data-level="90"></div>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3 class="tech-category-title">Network &amp; Infrastructure</h3>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">RTP, RTSP, UDP, TCP, Multicast</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">SMPTE, EBU, ITU-R Standards</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Network Analysis &amp; QoS Management</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Broadcast Facility Design</div>
+                </div>
+                <div class="tech-skill">
+                    <div class="tech-skill-name">Cabling Standards &amp; Infrastructure</div>
+                </div>
+                <div class="tech-bar">
+                    <div class="tech-progress" data-level="88"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section id="experience">
+        <h2 class="section-title">Career Trajectory</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content highlight">
+                    <div class="timeline-year">2024 - Present</div>
+                    <h3 class="timeline-title">Broadcasting Manager</h3>
+                    <div class="timeline-company">Fluidscapes Consultants | Mumbai</div>
+                    <ul class="timeline-achievements">
+                        <li>Lead broadcast engineering operations as Technical Director</li>
+                        <li>Design and implement broadcast facility upgrades</li>
+                        <li>Manage satellite communication systems</li>
+                        <li>Establish 99.9% uptime broadcast standards</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022 - 2024</div>
+                    <h3 class="timeline-title">Manager - Broadcast Partnerships &amp; Strategy</h3>
+                    <div class="timeline-company">Trifecta | Chennai</div>
+                    <ul class="timeline-achievements">
+                        <li>Architected NDI workflows reducing latency by 40%</li>
+                        <li>Led esports operations and IP development</li>
+                        <li>Managed broadcast engineering solutions</li>
+                        <li>Drove strategic partnership programs</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021 - 2022</div>
+                    <h3 class="timeline-title">Project Manager</h3>
+                    <div class="timeline-company">GGNation | Chennai</div>
+                    <ul class="timeline-achievements">
+                        <li>Implemented automated switching and graphics integration</li>
+                        <li>Designed production pipelines reducing setup time by 60%</li>
+                        <li>Managed 15+ tournament IPs</li>
+                        <li>Created investor decks and sponsorship presentations</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018 - 2021</div>
+                    <h3 class="timeline-title">Manager - Esports &amp; Broadcast</h3>
+                    <div class="timeline-company">Immortals India Gaming Enterprise | Mumbai</div>
+                    <ul class="timeline-achievements">
+                        <li>Led technical ops for 15+ major tournaments (90,000+ viewers)</li>
+                        <li>Directed live broadcasts totaling 15,000+ hours</li>
+                        <li>Pioneered mobile esports broadcasting workflows</li>
+                        <li>Managed equipment worth ₹2+ crores</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016 - 2017</div>
+                    <h3 class="timeline-title">Manager - League Ops &amp; Broadcast</h3>
+                    <div class="timeline-company">Indian Esports Championship | Mumbai</div>
+                    <ul class="timeline-achievements">
+                        <li>Pioneered esports broadcasting in India</li>
+                        <li>Achieved 1.2M+ viewership across 3-day events</li>
+                        <li>Designed broadcast infrastructure for multi-game format</li>
+                        <li>Established foundational industry workflows</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Major Events -->
+    <section id="events">
+        <h2 class="section-title">29 Major Event IPs Delivered</h2>
+        <div class="events-grid">
+            <div class="event-card"><div class="event-name">Indian Esports Championship 2016</div></div>
+            <div class="event-card"><div class="event-name">Asus ROG 2017</div></div>
+            <div class="event-card"><div class="event-name">MTV Ucypher</div></div>
+            <div class="event-card"><div class="event-name">PUBG Acer Predator League 2019-2020</div></div>
+            <div class="event-card"><div class="event-name">PUBG Mobile India Series Finals 2019</div></div>
+            <div class="event-card"><div class="event-name">FreeFire India Today League 2019</div></div>
+            <div class="event-card"><div class="event-name">Valorant Battle of Agents 2021</div></div>
+            <div class="event-card"><div class="event-name">GGNation Challenger Series 2022</div></div>
+            <div class="event-card"><div class="event-name">Esportz Premier Series 2023</div></div>
+            <div class="event-card"><div class="event-name">Hitwicket World Championship 2023</div></div>
+            <div class="event-card"><div class="event-name">Playtonia Conqueror's Insignia 2017</div></div>
+            <div class="event-card"><div class="event-name">MMSC Bike Racing 2018</div></div>
+            <div class="event-card"><div class="event-name">Smaaash Fifa Championship 2018</div></div>
+            <div class="event-card"><div class="event-name">Uri: The Surgical Strike (Game)</div></div>
+            <div class="event-card"><div class="event-name">Taiwan Excellence Gaming 2018</div></div>
+            <div class="event-card"><div class="event-name">PUBG Mobile Campus Championship</div></div>
+            <div class="event-card"><div class="event-name">Acer PUBG PC Championship 2019</div></div>
+            <div class="event-card"><div class="event-name">PUBG Mobile All Stars 2019</div></div>
+            <div class="event-card"><div class="event-name">Mumbai Esports Championship 2019-20</div></div>
+            <div class="event-card"><div class="event-name">CSGO Lockdown Cup 2020</div></div>
+        </div>
+    </section>
+
+    <!-- Key Achievements -->
+    <section id="achievements">
+        <h2 class="section-title">Impact by Numbers</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🎬</div>
+                <div class="achievement-metric">150+</div>
+                <div class="achievement-label">Live Productions Executed</div>
+                <p class="achievement-description">Seamless event management from concept to delivery</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⏱️</div>
+                <div class="achievement-metric">25,000+</div>
+                <div class="achievement-label">Hours of Content Delivered</div>
+                <p class="achievement-description">Consistent, high-quality broadcast delivery</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">👥</div>
+                <div class="achievement-metric">1.2M+</div>
+                <div class="achievement-label">Peak Viewership</div>
+                <p class="achievement-description">Indian Esports Championship 2016 achievement</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">📹</div>
+                <div class="achievement-metric">15,000+</div>
+                <div class="achievement-label">Hours of Live Broadcasts</div>
+                <p class="achievement-description">Multi-platform simultaneous streaming</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⚡</div>
+                <div class="achievement-metric">40%</div>
+                <div class="achievement-label">Latency Reduction</div>
+                <p class="achievement-description">NDI-based workflow optimization</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⏱️</div>
+                <div class="achievement-metric">60%</div>
+                <div class="achievement-label">Setup Time Improvement</div>
+                <p class="achievement-description">Production pipeline optimization</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">💎</div>
+                <div class="achievement-metric">₹2+ Cr.</div>
+                <div class="achievement-label">Equipment Value Managed</div>
+                <p class="achievement-description">Premium broadcast infrastructure oversight</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">✅</div>
+                <div class="achievement-metric">99.9%</div>
+                <div class="achievement-label">Uptime Standard</div>
+                <p class="achievement-description">Broadcast operations reliability</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Partners -->
+    <section id="partners">
+        <h2 class="section-title">Trusted by Industry Leaders</h2>
+        <div class="partners-grid">
+            <div class="partner-tag">Tencent</div>
+            <div class="partner-tag">Garena</div>
+            <div class="partner-tag">MTV</div>
+            <div class="partner-tag">India Today Group</div>
+            <div class="partner-tag">PUBG</div>
+            <div class="partner-tag">Valorant</div>
+            <div class="partner-tag">FreeFire</div>
+            <div class="partner-tag">Acer</div>
+            <div class="partner-tag">Immortals</div>
+            <div class="partner-tag">GGNation</div>
+        </div>
+    </section>
+
+    <!-- Contact/CTA -->
+    <section id="contact">
+        <div class="contact-section">
+            <h2 class="contact-heading">Ready to Broadcast Greatness?</h2>
+            <p class="contact-subheading">Let's elevate your esports production to the next level</p>
+            <div class="contact-info">
+                <div class="contact-item">📧 <a href="mailto:ninad.acads@gmail.com">ninad.acads@gmail.com</a></div>
+                <div class="contact-item">📱 <a href="tel:+919757053635">+91-9757053635</a></div>
+                <div class="contact-item">💼 <a href="https://linkedin.com/in/ninad4hire" target="_blank">LinkedIn</a></div>
+            </div>
+            <div class="cta-buttons">
+                <a href="mailto:ninad.acads@gmail.com" class="cta-button">Start Your Production</a>
+                <a href="tel:+919757053635" class="cta-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Ninad Yadav. All rights reserved. | The One-Man Production Powerhouse</p>
+            <p style="margin-top: 16px;">
+                <a href="https://linkedin.com/in/ninad4hire" target="_blank" class="social-link">LinkedIn</a>
+                <a href="mailto:ninad.acads@gmail.com" class="social-link">Email</a>
+                <a href="tel:+919757053635" class="social-link">Phone</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Anime.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero Animation
+            function animateHero() {
+                const heroTimeline = anime.timeline({
+                    easing: 'easeOutExpo',
+                    duration: 1000
+                });
+
+                heroTimeline
+                    .add({
+                        targets: '.hero-tag',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 800
+                    })
+                    .add({
+                        targets: '.hero-title',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 1200
+                    }, '-=600')
+                    .add({
+                        targets: '.hero-subtitle',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 1000
+                    }, '-=800')
+                    .add({
+                        targets: '.hero-stat',
+                        opacity: [0, 1],
+                        translateY: [40, 0],
+                        scale: [0.8, 1],
+                        duration: 800,
+                        delay: anime.stagger(100)
+                    }, '-=600')
+                    .add({
+                        targets: '.cta-button',
+                        opacity: [0, 1],
+                        scale: [0.8, 1],
+                        duration: 800
+                    }, '-=400');
+
+                // Pulsing animation for CTA button
+                anime({
+                    targets: '.cta-button',
+                    scale: [1, 1.05, 1],
+                    duration: 2000,
+                    easing: 'easeInOutQuad',
+                    loop: true
+                });
+            }
+
+            // Intersection Observer
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const section = entry.target.id;
+                        animateSection(section);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (section.id !== 'hero') {
+                    observer.observe(section);
+                }
+            });
+
+            // Section Animations
+            function animateSection(sectionId) {
+                const sectionTitle = document.querySelector(`#${sectionId} .section-title, #${sectionId} .contact-heading`);
+                if (sectionTitle) {
+                    anime({
+                        targets: sectionTitle,
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 1000,
+                        easing: 'easeOutExpo'
+                    });
+                }
+
+                if (sectionId === 'impact') {
+                    anime({
+                        targets: '.impact-card',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        scale: [0.9, 1],
+                        duration: 800,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(150)
+                    });
+                }
+
+                if (sectionId === 'services') {
+                    anime({
+                        targets: '.service-card',
+                        opacity: [0, 1],
+                        translateY: [60, 0],
+                        scale: [0.8, 1],
+                        rotate: [5, 0],
+                        duration: 1000,
+                        easing: 'easeOutElastic(1, .8)',
+                        delay: anime.stagger(100)
+                    });
+                }
+
+                if (sectionId === 'tech') {
+                    anime({
+                        targets: '.tech-category',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 1000,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(200)
+                    });
+
+                    setTimeout(() => {
+                        const techBars = document.querySelectorAll('.tech-progress');
+                        techBars.forEach(bar => {
+                            const level = bar.getAttribute('data-level');
+                            anime({
+                                targets: bar,
+                                width: level + '%',
+                                duration: 2000,
+                                easing: 'easeInOutQuad'
+                            });
+                        });
+                    }, 500);
+                }
+
+                if (sectionId === 'experience') {
+                    const timelineItems = document.querySelectorAll('.timeline-item');
+                    timelineItems.forEach((item, index) => {
+                        const isEven = index % 2 === 0;
+                        anime({
+                            targets: item,
+                            opacity: [0, 1],
+                            translateX: [isEven ? -100 : 100, 0],
+                            duration: 1000,
+                            easing: 'easeOutExpo',
+                            delay: index * 200
+                        });
+                    });
+                }
+
+                if (sectionId === 'events') {
+                    anime({
+                        targets: '.event-card',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        scale: [0.8, 1],
+                        duration: 600,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(50)
+                    });
+                }
+
+                if (sectionId === 'achievements') {
+                    anime({
+                        targets: '.achievement-card',
+                        opacity: [0, 1],
+                        translateY: [60, 0],
+                        scale: [0.8, 1],
+                        duration: 800,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(100)
+                    });
+
+                    // Animate counters
+                    setTimeout(() => {
+                        const metrics = document.querySelectorAll('.achievement-metric');
+                        metrics.forEach(metric => {
+                            const text = metric.textContent;
+                            const hasPercent = text.includes('%');
+                            const hasCr = text.includes('Cr');
+                            const hasK = text.includes('K');
+                            const hasM = text.includes('M');
+                            const hasPlus = text.includes('+');
+                            
+                            let numValue = parseFloat(text.replace(/[^0-9.]/g, ''));
+                            
+                            if (!isNaN(numValue)) {
+                                let obj = { value: 0 };
+                                anime({
+                                    targets: obj,
+                                    value: numValue,
+                                    duration: 2000,
+                                    easing: 'easeOutExpo',
+                                    round: hasPercent || hasCr ? 1 : 0,
+                                    update: function() {
+                                        let displayValue = obj.value;
+                                        if (hasK) displayValue += 'K';
+                                        if (hasM) displayValue += 'M';
+                                        if (hasCr) displayValue = '₹' + displayValue + '+ Cr.';
+                                        if (hasPercent) displayValue += '%';
+                                        if (hasPlus && !hasCr) displayValue += '+';
+                                        metric.textContent = displayValue;
+                                    }
+                                });
+                            }
+                        });
+                    }, 300);
+                }
+
+                if (sectionId === 'partners') {
+                    anime({
+                        targets: '.partner-tag',
+                        opacity: [0, 1],
+                        scale: [0, 1],
+                        duration: 600,
+                        easing: 'easeOutElastic(1, .6)',
+                        delay: anime.stagger(80)
+                    });
+                }
+
+                if (sectionId === 'contact') {
+                    anime({
+                        targets: '.contact-subheading',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 1000,
+                        easing: 'easeOutExpo',
+                        delay: 200
+                    });
+
+                    anime({
+                        targets: '.contact-item',
+                        opacity: [0, 1],
+                        scale: [0.8, 1],
+                        duration: 800,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(100, {start: 400})
+                    });
+
+                    anime({
+                        targets: '.cta-buttons .cta-button, .cta-buttons .cta-secondary',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo',
+                        delay: anime.stagger(150, {start: 800})
+                    });
+                }
+            }
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Initialize hero
+            animateHero();
+        });
+    </script>
+</body>
+</html>
