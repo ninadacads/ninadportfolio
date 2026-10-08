@@ -127,3 +127,40 @@ footer { padding: 85px clamp(1rem, 5vw, 5.75rem) 30px; background: var(--signal)
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Video gallery: official-source embeds styled as monitor tiles. */
+.video-section { background: #111315; }
+.video-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.video-card { min-width: 0; border: 1px solid var(--line); background: #191c1e; overflow: hidden; }
+.video-frame { aspect-ratio: 16 / 9; background: #080909; }
+.video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video-card-copy { padding: 1.25rem 1.4rem 1.4rem; }
+.video-index { color: var(--signal); font: 700 .7rem var(--display); letter-spacing: .15em; }
+.video-card-copy h3 { margin: .5rem 0; font: 700 clamp(1.45rem, 2.4vw, 2.1rem)/1 var(--display); text-transform: uppercase; }
+.video-card-copy p { margin: 0 0 1rem; color: var(--muted); font-size: .78rem; }
+.video-card-copy a { display: inline-flex; align-items: center; gap: .5rem; color: var(--lime); font: 700 .72rem var(--display); letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+.video-card-copy a:hover { color: var(--paper); }
+.video-empty { padding: 2rem; border: 1px dashed var(--line); color: var(--muted); }
+@media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } }
+
+
+/* Signal Desk — a distinct RSS page sharing the portfolio's broadcast palette. */
+.rss-hero { min-height: 450px; padding: 150px clamp(1rem, 5vw, 5.75rem) 4rem; position: relative; overflow: hidden; background: radial-gradient(circle at 83% 42%, rgba(255,90,54,.15), transparent 28%), linear-gradient(115deg, #111315 0 58%, #171a1c 58% 100%); border-bottom: 1px solid var(--line); }
+.rss-hero::after { content: "RSS"; position: absolute; right: 5vw; bottom: -3.2rem; color: rgba(255,255,255,.025); font: 800 clamp(12rem, 31vw, 30rem)/.8 var(--display); pointer-events: none; }
+.rss-hero h1 { position: relative; z-index: 1; margin: 0; font: 800 clamp(5rem, 13vw, 10rem)/.75 var(--display); letter-spacing: -.045em; text-transform: uppercase; }
+.rss-hero h1 em { color: transparent; -webkit-text-stroke: 1px rgba(240,238,232,.68); font-style: normal; }
+.rss-hero > p:not(.eyebrow) { position: relative; z-index: 1; max-width: 620px; margin: 2rem 0 1.4rem; color: #b6b9b7; font-size: 1rem; }
+.rss-status { display: inline-flex; align-items: center; gap: .65rem; position: relative; z-index: 1; padding: .55rem .75rem; border: 1px solid #414647; color: #b6b9b7; font: 700 .68rem var(--display); letter-spacing: .13em; }
+.rss-status > span { width: 7px; height: 7px; border-radius: 50%; background: #777; }.rss-status .rss-live-dot { background: var(--lime); box-shadow: 0 0 0 4px rgba(196,215,164,.1); }
+.rss-content { background: var(--paper); color: var(--ink); }.rss-content .section-heading > p { color: #606463; }
+.rss-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding: .75rem 0; border-top: 1px solid #bbb8b0; border-bottom: 1px solid #bbb8b0; }
+.rss-filters { display: flex; flex-wrap: wrap; gap: .5rem; }.rss-filters button, .rss-refresh { padding: .55rem .75rem; border: 1px solid #b7b4ac; background: transparent; color: var(--ink); cursor: pointer; font: 700 .7rem var(--display); letter-spacing: .08em; text-transform: uppercase; }.rss-filters button.active, .rss-filters button:hover, .rss-refresh:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.rss-story-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #bbb8b0; border: 1px solid #bbb8b0; }
+.rss-story { min-width: 0; min-height: 250px; padding: 1.4rem; background: var(--paper); display: flex; flex-direction: column; align-items: flex-start; }
+.rss-story-meta { width: 100%; display: flex; justify-content: space-between; gap: .75rem; color: var(--signal-soft); font: 700 .68rem var(--display); letter-spacing: .1em; text-transform: uppercase; }.rss-story-meta time { color: #737775; white-space: nowrap; }
+.rss-story h3 { margin: 1rem 0 .7rem; font: 700 clamp(1.4rem, 2.1vw, 2rem)/1.1 var(--display); text-transform: uppercase; }.rss-story h3 a { text-decoration: none; display: inline; }.rss-story h3 svg { color: var(--signal-soft); margin-left: .5rem; }.rss-story h3 a:hover { color: var(--signal-soft); }
+.rss-story > p { margin: 0 0 1.2rem; color: #626865; font-size: .8rem; }.rss-read-link { margin-top: auto; display: inline-flex; align-items: center; gap: .45rem; color: #252a28; font: 700 .7rem var(--display); letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }.rss-read-link:hover { color: var(--signal-soft); }
+.rss-story-error { border-left: 3px solid var(--signal); }.rss-story-source { color: var(--signal-soft); font: 700 .7rem var(--display); letter-spacing: .1em; text-transform: uppercase; }.rss-message { min-height: 180px; display: grid; place-content: center; gap: 1rem; text-align: center; color: #626865; border: 1px dashed #bbb8b0; padding: 2rem; }.rss-message h3 { margin: 0; color: var(--ink); font: 700 1.8rem var(--display); text-transform: uppercase; }.rss-message .button { justify-self: center; }
+.rss-source-list { margin-top: 4rem; border-top: 1px solid #bbb8b0; }.rss-source-list > .eyebrow { margin: 1.2rem 0; }.rss-source-list > a { display: grid; grid-template-columns: minmax(150px, .7fr) 1.3fr auto; align-items: center; gap: 1.5rem; padding: 1.25rem .2rem; border-top: 1px solid #d0cdc5; text-decoration: none; }.rss-source-list > a span { font: 700 1.3rem var(--display); text-transform: uppercase; }.rss-source-list > a small { color: #666b68; }.rss-source-list > a:hover span { color: var(--signal-soft); }
+@media (max-width: 760px) { .rss-hero { min-height: 390px; padding-top: 120px; }.rss-hero h1 { font-size: clamp(5rem, 24vw, 8rem); }.rss-story-list { grid-template-columns: 1fr; }.rss-story { min-height: 220px; }.rss-source-list > a { grid-template-columns: 1fr auto; gap: .4rem 1rem; }.rss-source-list > a small { grid-column: 1; }.rss-source-list > a svg { grid-column: 2; grid-row: 1 / span 2; } }
