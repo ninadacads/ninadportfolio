@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sports-video-group",
+    "name": "Sports Video Group",
+    "shortName": "Sports Video Group",
+    "description": "Sports production, broadcast technology, and video distribution.",
+    "siteUrl": "https://www.sportsvideo.org/",
+    "feedUrl": "https://www.sportsvideo.org/feed/"
+  },
+  {
+    "id": "esports-gg",
+    "name": "Esports.gg",
+    "shortName": "Esports.gg",
+    "description": "Esports news, competitions, and gaming culture.",
+    "siteUrl": "https://esports.gg/",
+    "feedUrl": "https://esports.gg/feed/"
+  }
+]

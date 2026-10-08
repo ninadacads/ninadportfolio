@@ -40,15 +40,19 @@ const Logo = ({ event, large = false }) => event.logo ? (
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const onFeedPage = window.location.pathname === "/rss.html";
+  const sectionHref = id => onFeedPage ? `/#${id}` : `#${id}`;
   return (
     <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Ninad Yadav, home"><span>NY</span><strong>NINAD YADAV</strong></a>
+      <a className="wordmark" href={sectionHref("top")} aria-label="Ninad Yadav, home"><span>NY</span><strong>NINAD YADAV</strong></a>
       <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="site-nav">Menu</button>
       <nav id="site-nav" className={open ? "nav-open" : ""} aria-label="Primary navigation">
-        <a href="#featured" onClick={() => setOpen(false)}>Featured</a>
-        <a href="#portfolio" onClick={() => setOpen(false)}>Events</a>
-        <a href="#timeline" onClick={() => setOpen(false)}>Timeline</a>
-        <a href="#sources" onClick={() => setOpen(false)}>Sources</a>
+        <a href={sectionHref("featured")} onClick={() => setOpen(false)}>Featured</a>
+        <a href={sectionHref("portfolio")} onClick={() => setOpen(false)}>Events</a>
+        <a href={sectionHref("videos")} onClick={() => setOpen(false)}>Videos</a>
+        <a href="/rss.html" onClick={() => setOpen(false)}>RSS desk</a>
+        <a href={sectionHref("timeline")} onClick={() => setOpen(false)}>Timeline</a>
+        <a href={sectionHref("sources")} onClick={() => setOpen(false)}>Sources</a>
         <a className="nav-contact" href="mailto:ninad.acads@gmail.com">Contact</a>
       </nav>
     </header>
@@ -85,6 +89,35 @@ const Metrics = () => (
     {METRICS.map(([value, label]) => <div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>)}
   </section>
 );
+
+const VideoGallery = ({ events }) => {
+  const seenVideos = new Set();
+  const videos = events.flatMap(event => (event.videoLinks || []).flatMap(link => {
+    if (link.rightsStatus !== "official-embed") return [];
+    let url;
+    try { url = new URL(link.url); } catch { return []; }
+    const id = ["youtube.com", "www.youtube.com", "m.youtube.com"].includes(url.hostname) ? url.searchParams.get("v") : null;
+    if (!id || !/^[a-zA-Z0-9_-]{11}$/.test(id) || seenVideos.has(id)) return [];
+    seenVideos.add(id);
+    const videoTitle = { ZGjp9Rz41cU: "PUBG Mobile | Oppo F9 Pro Campus Championship India 2018 | Semi Finals Day 2 | Hindi", nDQSlA1XhoI: "Finals — [HINDI] OPPO X PUBG MOBILE India Tour Group C" }[id];
+    return [{ id, eventName: event.eventName, videoTitle, year: event.year, label: link.label, url: link.url }];
+  }));
+
+  return (
+    <section id="videos" className="section-shell video-section">
+      <div className="section-heading">
+        <div><p className="eyebrow">Official event footage</p><h2>Video gallery</h2></div>
+        <p>Selected clips linked from official event sources already documented in the event records. Videos are embedded from YouTube; the site does not host third-party media.</p>
+      </div>
+      {videos.length ? <div className="video-grid">{videos.map((video, index) => (
+        <article className="video-card" key={`${video.id}-${video.eventName}`}>
+          <div className="video-frame"><iframe src={`https://www.youtube-nocookie.com/embed/${video.id}`} title={`${video.eventName} — official event video`} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+          <div className="video-card-copy"><span className="video-index">CLIP {String(index + 1).padStart(2, "0")} · {video.year}</span><h3>{video.eventName}</h3><p>{video.videoTitle}</p><a href={video.url} target="_blank" rel="noreferrer">Open on YouTube <Icon name="link"/></a></div>
+        </article>
+      ))}</div> : <p className="video-empty">No official, directly linked videos are currently available in the event records.</p>}
+    </section>
+  );
+};
 
 const EventCard = ({ event, onOpen, featured = false }) => (
   <article className={`event-card${featured ? " event-card--featured" : ""}`} id={event.id}>
@@ -223,8 +256,65 @@ const DetailModal = ({ event, onClose }) => {
 };
 
 const Footer = () => (
-  <footer><div><p className="eyebrow">Available for broadcast engineering, live direction and infrastructure strategy</p><h2>Keep the signal clean.</h2></div><div className="footer-links"><a href="mailto:ninad.acads@gmail.com">ninad.acads@gmail.com</a><a href="https://www.linkedin.com/in/ninad4hire" target="_blank" rel="noreferrer">LinkedIn</a><span>Mumbai, India</span></div><p className="copyright">© 2026 Ninad Yadav · Content sourced from the supplied professional resume.</p></footer>
+  <footer><div><p className="eyebrow">Available for broadcast engineering, live direction and infrastructure strategy</p><h2>Keep the signal clean.</h2></div><div className="footer-links"><a href="mailto:ninad.acads@gmail.com">ninad.acads@gmail.com</a><a href="https://www.linkedin.com/in/ninad4hire" target="_blank" rel="noreferrer">LinkedIn</a><span>Mumbai, India</span></div><p className="copyright">© 2026 Ninad Yadav · Portfolio claims are resume-sourced; linked news remains the property of its publishers.</p></footer>
 );
+
+const parseFeed = xml => {
+  const documentXml = new DOMParser().parseFromString(xml, "text/xml");
+  if (documentXml.querySelector("parsererror")) throw new Error("The source returned invalid RSS or Atom XML.");
+  const entries = [...documentXml.querySelectorAll("channel > item, feed > entry")];
+  return entries.map(entry => {
+    const text = name => entry.getElementsByTagName(name)[0]?.textContent?.trim() || "";
+    const linkNode = entry.querySelector('link[rel="alternate"][href]') || entry.querySelector('link:not([rel="self"])[href]') || entry.querySelector("link[href]");
+    const rawLink = linkNode?.getAttribute("href") || text("link");
+    let link = "";
+    try { const parsed = new URL(rawLink); if (["https:", "http:"].includes(parsed.protocol)) link = parsed.href; } catch {}
+    const rawDescription = text("description") || text("summary") || text("content");
+    const description = new DOMParser().parseFromString(rawDescription, "text/html").body.textContent.replace(/\s+/g, " ").trim().slice(0, 260);
+    const date = text("pubDate") || text("published") || text("updated") || text("date");
+    return { title: text("title") || "Untitled feed item", link, description, date, timestamp: Date.parse(date) || 0 };
+  }).filter(item => item.link).slice(0, 20);
+};
+
+const RSSDesk = () => {
+  const [feeds, setFeeds] = useState([]);
+  const [stories, setStories] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [state, setState] = useState("loading");
+  const load = () => {
+    setState("loading");
+    fetch("/src/data/rss-feeds.json", { cache: "no-store" }).then(response => {
+      if (!response.ok) throw new Error("Feed configuration could not be loaded.");
+      return response.json();
+    }).then(async sources => {
+      setFeeds(sources);
+      const results = await Promise.all(sources.map(async source => {
+        try {
+          const response = await fetch(`/.netlify/functions/rss?source=${encodeURIComponent(source.id)}`);
+          if (!response.ok) throw new Error("This feed is temporarily unavailable.");
+          const items = parseFeed(await response.text());
+          return items.map(item => ({ ...item, sourceId: source.id, sourceName: source.name }));
+        } catch (error) { return [{ sourceId: source.id, sourceName: source.name, error: error.message || "Feed unavailable" }]; }
+      }));
+      setStories(results.flat().sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)));
+      setState("ready");
+    }).catch(() => setState("error"));
+  };
+  useEffect(load, []);
+  const visible = stories.filter(item => filter === "all" || item.sourceId === filter);
+  const total = stories.filter(item => item.link).length;
+  return (
+    <>
+      <section className="rss-hero"><p className="eyebrow">Live industry reading / RSS</p><h1>Signal<br/><em>desk.</em></h1><p>A hand-picked stream of broadcast technology and esports headlines. Original publishers retain ownership; every story opens at its source.</p><div className="rss-status"><span className={state === "ready" ? "rss-live-dot" : ""}></span>{state === "loading" ? "CONNECTING TO SOURCES" : state === "ready" ? `${total} STORIES · SOURCES REFRESH ON VISIT` : "FEED SERVICE UNAVAILABLE"}</div></section>
+      <section className="rss-content section-shell">
+        <div className="section-heading"><div><p className="eyebrow">Latest dispatches</p><h2>From the field</h2></div><p>Updates are retrieved from the publishers' RSS feeds when this page loads. Use the publisher links below to read the full story.</p></div>
+        <div className="rss-toolbar"><div className="rss-filters"><button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>All sources</button>{feeds.map(source => <button key={source.id} className={filter === source.id ? "active" : ""} onClick={() => setFilter(source.id)}>{source.shortName || source.name}</button>)}</div><button className="rss-refresh" onClick={load}>Refresh feeds</button></div>
+        {state === "loading" ? <div className="rss-message">Tuning into the feeds…</div> : state === "error" ? <div className="rss-message"><h3>Feed configuration could not load.</h3><button className="button button-primary" onClick={load}>Try again</button></div> : visible.length === 0 ? <div className="rss-message">No recent stories from this source right now.</div> : <div className="rss-story-list">{visible.map((item, index) => item.error ? <article className="rss-story rss-story-error" key={`error-${item.sourceId}`}><span className="rss-story-source">{item.sourceName}</span><h3>Feed temporarily unavailable</h3><p>{item.error}</p></article> : <article className="rss-story" key={`${item.sourceId}-${item.link}-${index}`}><div className="rss-story-meta"><span>{item.sourceName}</span><time>{item.date && !Number.isNaN(Date.parse(item.date)) ? new Date(item.date).toLocaleDateString("en-IN", { dateStyle: "medium" }) : "Recent"}</time></div><h3><a href={item.link} target="_blank" rel="noreferrer">{item.title}<Icon name="arrow"/></a></h3>{item.description && <p>{item.description}</p>}<a className="rss-read-link" href={item.link} target="_blank" rel="noreferrer">Read at source <Icon name="link"/></a></article>)}</div>}
+        <div className="rss-source-list"><p className="eyebrow">Connected publications</p>{feeds.map(source => <a key={source.id} href={source.siteUrl} target="_blank" rel="noreferrer"><span>{source.name}</span><small>{source.description}</small><Icon name="arrow"/></a>)}</div>
+      </section>
+    </>
+  );
+};
 
 const Loading = () => <main><div className="loading-hero"></div><div className="loading-grid">{[1,2,3,4,5,6].map(item => <div key={item}></div>)}</div></main>;
 const ErrorState = ({ retry }) => <main className="load-error"><span>DATA LINK ERROR</span><h1>The event index did not load.</h1><p>Check the local data files and retry the request.</p><button className="button button-primary" onClick={retry}>Retry</button></main>;
@@ -243,7 +333,8 @@ const App = () => {
   useEffect(load, []);
   if (status === "loading") return <Loading/>;
   if (status === "error") return <ErrorState retry={load}/>;
-  return <><Header/><main><Hero/><Metrics/><Featured events={events} onOpen={setSelected}/><Portfolio events={events} onOpen={setSelected}/><MediaWall events={events}/><Sources sources={sources}/></main><Footer/><DetailModal event={selected} onClose={() => setSelected(null)}/></>;
+  return <><Header/><main><Hero/><Metrics/><VideoGallery events={events}/><Featured events={events} onOpen={setSelected}/><Portfolio events={events} onOpen={setSelected}/><MediaWall events={events}/><Sources sources={sources}/></main><Footer/><DetailModal event={selected} onClose={() => setSelected(null)}/></>;
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+const isRSSPage = window.location.pathname === "/rss.html";
+ReactDOM.createRoot(document.getElementById("root")).render(isRSSPage ? <><Header/><main id="main-content"><RSSDesk/></main><Footer/></> : <App/>);
